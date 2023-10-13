@@ -1,0 +1,204 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./resources/style.css" media="screen"/>
+
+<html lang="en">
+<head>
+	<title>Self-supervised Object-Centric Learning for Videos</title>
+	<meta property="og:image" content="Path to my teaser.jpg"/>
+	<meta property="og:title" content="SOLV" />
+	<meta property="og:description" content="SOLV" />
+    <meta property="twitter:card"          content="SOLV" />
+    <meta property="twitter:title"         content="SOLV" />
+    <meta property="twitter:description"   content="SOLV" />
+    <meta property="twitter:image"         content="Path to my teaser.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Add your Google Analytics tag here -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-97476543-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-97476543-1');
+    </script>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="title">
+      Self-supervised Object-Centric Learning for Videos
+    </div>
+
+
+    <br><br>
+    <div class="author">
+        <a href="https://github.com/gorkaydemir" target="_blank">Gorkay Aydemir</a><sup>1</sup>
+    </div>
+    <div class="author">
+        <a href="https://weidixie.github.io" target="_blank">Weidi Xie</a><sup>3, 4</sup>
+    </div>
+    <div class="author">
+        <a href="https://mysite.ku.edu.tr/fguney/" target="_blank">Fatma Guney</a><sup>1, 2</sup>
+    </div>
+
+    <br><br>
+    <div class="affiliation"><sup>1&nbsp;</sup><a href="https://cs.ku.edu.tr" target="_blank">Department of Computer Engineering, Koc University</a></div>
+    <div class="affiliation"><sup>2&nbsp;</sup><a href="https://ai.ku.edu.tr" target="_blank">KUIS AI Center</a></div>
+    <div class="affiliation"><sup>3&nbsp;</sup><a href="https://en.sjtu.edu.cn" target="_blank">CMIC, Shanghai Jiao Tong University</a></div>
+    <div class="affiliation"><sup>4&nbsp;</sup><a href="https://www.shlab.org.cn" target="_blank">Shanghai AI Laboratory</a></div>
+
+    
+    <div class="venue">
+      NeurIPS 2023
+    </div>
+    <br><br>
+
+
+    <!-- <div class="links">Paper <a href="https://arxiv.org/abs/2307.14187" target="_blank"> [arXiv]</a></div> -->
+    <div class="links">Paper <a href="https://arxiv.org/abs/2310.06907" target="_blank"> [arXiv]</a></div>
+    <div class="links">Code [Coming Soon]</a></div>
+    <div class="links">Cite <a href="./resources/bibtex.txt" target="_blank"> [BibTeX]</a></div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="cropped">
+        <img style="width: 80%;" src="./resources/result_gifs/teaser1.gif"/>
+      </div>
+      <div class="cropped">
+        <img style="width: 80%;" src="./resources/result_gifs/teaser2.gif"/>
+      </div>
+    </div><br>
+
+    <div class="box"><b> <FONT COLOR="RED">TL;DR</FONT></b> we introduce <b>SOLV</b> (Self-supervised Object Centric Learning for Videos), a self-supervised model capable of discovering multiple objects in real-world video sequences without using additional modalities. </div>
+
+    <br>
+
+    <br>
+    <hr>
+
+    <h1>Abstract</h1>
+    <p style="width: 80%;">
+      Unsupervised multi-object segmentation has shown impressive results on images by utilizing powerful semantics learned from self-supervised pretraining. 
+      An additional modality such as depth or motion is often used to facilitate the segmentation in video sequences. However, the performance improvements observed in synthetic sequences, which rely on the robustness of an additional cue, do not translate to more challenging real-world scenarios.
+      In this paper, we propose the first fully unsupervised method for segmenting multiple objects in real-world sequences. 
+      Our object-centric learning framework spatially binds objects to slots on each frame and then relates these slots across frames. 
+      From these temporally-aware slots, 
+      the training objective is to reconstruct the middle frame in a high-level semantic feature space. 
+      We propose a masking strategy by dropping a significant portion of tokens in the feature space for efficiency and regularization.
+      Additionally, we address over-clustering by merging slots based on similarity. Our method can successfully segment multiple instances of complex and high-variety classes in YouTube videos.
+    </p>
+
+    <br><br>
+    <hr>
+
+    <h1>Method Overview</h1>
+    <img style="width: 80%;" src="./resources/pipeline.png"
+         alt="Method overview figure"/>
+    <br><br>
+    <p style="width: 80%;">
+      In this study, we introduce SOLV, an autoencoder-based model designed for object-centric learning in videos. 
+      Our model consists of three components: <br>
+      (i) <b>Visual Encoder</b> for extracting features for each frame; <br>
+      (ii) <b>Spatial-temporal Binding</b> module for generating temporally-aware object-centric representations; <br>
+      (iii) <b>Visual Decoder</b> for estimating segmentation masks and feature reconstructions for the central frame
+    </p>
+    <br>
+
+    <hr>
+
+    <h1>Quantitative Results</h1>
+
+    <!-- <img style="width: 38%;" src="./resources/movi_table.png" alt="MOVi-E SOTA"/><br><br>
+    <p style="width: 80%;">
+      <b>Quantitative Results on MOVi-E.</b> This table shows results in comparison to the previous work in terms of FG-ARI on MOVi-E.
+    </p>
+    <br><br>
+
+    <img style="width: 74%;" src="./resources/ytvis_table.png" alt="Interaction SOTA"/><br><br>
+    <p style="width: 80%;">
+      <b>Quantitative Results on Real-World Data.</b> These results show the video multi-object evaluation results on the validation split of DAVIS17 and a subset of the YTVIS19 train split.
+    </p> -->
+
+
+    <div class="row_v2">
+      <img class="img-center" style="width: 30%;" src="./resources/movi_table.png" alt="MOVi-E SOTA"/><br><br>
+      <img class="img-center" style="width: 10%;"><br><br>
+      <img class="img-center" style="width: 60%;height: 70%;" src="./resources/ytvis_table.png" alt="Real-World SOTA"/><br><br>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <p style="width: 30%;">
+        <b>Quantitative Results on MOVi-E.</b> This table shows results in comparison to the previous work in terms of FG-ARI on MOVi-E.
+      </p>
+
+      <p style="width: 10%;"> </p>
+      
+      <p style="width: 60%;">
+        <b>Quantitative Results on Real-World Data.</b> These results show the video multi-object evaluation results on the validation split of DAVIS17 and a subset of the YTVIS19 train split.
+      </p>
+    </div>
+
+    <br>
+
+    <hr>
+
+
+    <h1>Qualitative Results</h1>
+
+    <div class="row">
+      <div class="column">
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/ours_fg_116.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/ours_fg_131.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/ours_fg_143.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/ours_fg_199.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/ours_fg_244.gif"/></div>
+      </div>
+      <div class="column">
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/gt_116.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/gt_131.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/gt_143.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/gt_199.gif"/></div>
+        <div class="cropped_v2"><img style="width: 100%;" src="./resources/result_gifs/gt_244.gif"/></div>
+      </div>
+    </div>
+
+    <p style="width: 80%;">
+      <b> Qualitative results on YTVIS19.</b>
+        We visualize our object discovery results of multi-object video segmentation on YTVIS19 after Hungarian Matching is applied. 
+    </p>
+    <hr>
+
+    <h1>Paper</h1>
+
+    <div class="paper-info"style="width: 80%;">
+        <h3>Self-supervised Object-Centric Learning for Videos</h3>
+        <p>Gorkay Aydemir, Weidi Xie and Fatma Guney</p>
+
+        <p>NeurIPS 2023</p>
+        <pre><code>@InProceedings{Aydemir2023NeurIPS,
+          author = {Aydemir, G\"orkay and Xie, Weidi and G\"uney, Fatma},
+          title = {{S}elf-supervised {O}bject-Centric {L}earning for {V}ideos},
+          booktitle = {Advances in Neural Information Processing Systems},
+          year      = {2023}}
+                </code></pre>
+    </div>
+
+    <br><br>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+@InProceedings{Aydemir2023NeurIPS,
+    author = {Aydemir, G\"orkay and Xie, Weidi and G\"uney, Fatma},
+    title = {{S}elf-supervised {O}bject-centric {L}earning for {V}ideos},
+    booktitle = {Advances in Neural Information Processing Systems},
+    year      = {2023}}
